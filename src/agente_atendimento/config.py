@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from sqlalchemy.engine import URL
 
 
 class Settings(BaseSettings):
@@ -7,5 +8,21 @@ class Settings(BaseSettings):
     app_name: str = "Agente de atendimento"
     debug: bool = False
 
+    postgres_user: str
+    postgres_password: str
+    postgres_db: str
+    postgres_host: str = "localhost"
+    postgres_port: int = 5433
 
+    @property 
+    def database_url(self) -> URL:
+        return URL.create (
+        "postgresql+psycopg",
+        username=self.postgres_user,
+        password=self.postgres_password,
+        database=self.postgres_db,
+        host=self.postgres_host,
+        port=self.postgres_port,
+        
+        )
 settings = Settings()
