@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
-#Create esta recebendo o endereço do config.py
 
+#Create esta recebendo o endereço do config.py
 from sqlalchemy.orm import sessionmaker
 
 from agente_atendimento.config import settings
